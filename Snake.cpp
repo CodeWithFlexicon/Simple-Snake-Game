@@ -4,18 +4,19 @@
 #include <Windows.h>
 using namespace std;
 
-bool gameOver, lateGame;
+bool gameOver, lateGame, endGame;
 const int width = 30; //map dimensions
 const int height = 20;
 int nTail, score;
 enum eDirection { STOP, LEFT, RIGHT, UP, DOWN };
 eDirection dir;
 Snake tail[100], head;
-Fruit fruit, fruit2, fruit3, fruit4, fruit5, fruit6;
+Fruit fruit, fruit2, fruit3, fruit4, fruit5, fruit6, fruit7, fruit8, fruit9;
 
 void Setup() {
     gameOver = false;
     lateGame = false;
+    endGame = false;
     dir = STOP;
     srand(time(NULL));
     head.x = width / 2; //to place the snake in the middle by dividing the width by 2
@@ -50,6 +51,12 @@ void Draw() {
                 printf("X");
             else if (i == fruit6.y && j == fruit6.x)
                 printf("Z");
+            else if (i == fruit7.y && j == fruit7.x)
+                printf("A");
+            else if (i == fruit8.y && j == fruit8.x)
+                printf("B");
+            else if (i == fruit9.y && j == fruit9.x)
+                printf("C");
             else {
                 bool print = false;
                 for (int k = 0; k < nTail; k++) {
@@ -159,6 +166,35 @@ void Logic() {
             fruit6.x = rand() % width;
             fruit6.y = rand() % height;
             lateGame = true;
+        }
+        if (nTail > 20) {
+            if (!endGame) {
+                fruit7.x = rand() % width;
+                fruit7.y = rand() % height;
+                fruit8.x = rand() % width;
+                fruit8.y = rand() % height;
+                fruit9.x = rand() % width;
+                fruit9.y = rand() % height;
+                endGame = true;
+            }
+            if (head.x == fruit7.x && head.y == fruit7.y) {
+                score += 10;
+                fruit7.x = rand() % width;
+                fruit7.y = rand() % height;
+                nTail++;
+            }
+            if (head.x == fruit8.x && head.y == fruit8.y) {
+                score += 10;
+                fruit8.x = rand() % width;
+                fruit8.y = rand() % height;
+                nTail++;
+            }
+            if (head.x == fruit9.x && head.y == fruit9.y) {
+                score += 10;
+                fruit9.x = rand() % width;
+                fruit9.y = rand() % height;
+                nTail++;
+            }
         }
         if (head.x == fruit3.x && head.y == fruit3.y) {
             score += 10;
