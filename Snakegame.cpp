@@ -3,26 +3,26 @@
 #include <Windows.h>
 using namespace std;
 
-struct Snake {
+struct snake {
     int x, y;
 } tail[100], head;
 
-struct Fruit {
+struct fruit {
     int x, y;
-} fruit, fruit2;
+} fruit, fruit2, fruit3, fruit4, fruit5, fruit6;
 
-bool gameOver;
+bool gameOver, lateGame;
 const int width = 30; //map dimensions
 const int height = 20;
 int nTail, score;
 enum eDirection { STOP, LEFT, RIGHT, UP, DOWN };
 eDirection dir;
-char b = 'G';
-char a = 'Q';
 
 void Setup() {
     gameOver = false;
+    lateGame = false;
     dir = STOP;
+    srand(time(NULL));
     head.x = width / 2; //to place the snake in the middle by dividing the width by 2
     head.y = height / 2;
     fruit.x = rand() % width;
@@ -33,21 +33,28 @@ void Setup() {
 }
 
 void Draw() {
-    system("cls"); //clears the screen 
+    system("cls"); //clears the screen and produces a lot of flickering.
     for (int i = 0; i < width+2; i++)
         cout << "_";
-    cout << endl;
-
+    cout << "\n";
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             if (j == 0)
                 cout << "#";
             if (i == head.y && j == head.x)
-                cout << "O";
+                printf("O");
             else if (i == fruit.y && j == fruit.x)
-                cout << b;
+                printf("Q");
             else if (i == fruit2.y && j == fruit2.x)
-                cout << a;
+                printf("G");
+            else if (i == fruit3.y && j == fruit3.x)
+                printf("U");
+            else if (i == fruit4.y && j == fruit4.x)
+                printf("V");
+            else if (i == fruit5.y && j == fruit5.x)
+                printf("X");
+            else if (i == fruit6.y && j == fruit6.x)
+                printf("Z");
             else {
                 bool print = false;
                 for (int k = 0; k < nTail; k++) {      
@@ -62,13 +69,13 @@ void Draw() {
             if (j == width - 1)
                 cout << "#";
         }
-        cout << endl;
+        cout << "\n";
     }
 
     for (int i = 0; i < width+2; i++)
         cout << "-";
-    cout << endl;
-    cout << "Score: " << score << endl;
+    cout << "\n";
+    cout << "Score: " << score << "\n";
 }
 
 void Input() {
@@ -123,7 +130,8 @@ void Logic() {
     default:
         break;
     }
-    /*if (x > width || x < 0 || y > height || y < 0) {
+    /* this is if the game should end when the snake touches the edges of the map
+    if (x > width || x < 0 || y > height || y < 0) {
         gameOver = true;
     }*/
     if (head.x >= width) head.x = 0; else if (head.x < 0) head.x = width - 1;
@@ -144,6 +152,43 @@ void Logic() {
         fruit2.x = rand() % width;
         fruit2.y = rand() % height;
         nTail++;
+    }
+    if (nTail > 5) {
+        if (!lateGame) {
+            fruit3.x = rand() % width;
+            fruit3.y = rand() % height;
+            fruit4.x = rand() % width;
+            fruit4.y = rand() % height;
+            fruit5.x = rand() % width;
+            fruit5.y = rand() % height;
+            fruit6.x = rand() % width;
+            fruit6.y = rand() % height;
+            lateGame = true;
+        }
+        if (head.x == fruit3.x && head.y == fruit3.y) {
+            score += 10;
+            fruit3.x = rand() % width;
+            fruit3.y = rand() % height;
+            nTail++;
+        }
+        if (head.x == fruit4.x && head.y == fruit5.y) {
+            score += 10;
+            fruit4.x = rand() % width;
+            fruit4.y = rand() % height;
+            nTail++;
+        }
+        if (head.x == fruit5.x && head.y == fruit5.y) {
+            score += 10;
+            fruit5.x = rand() % width;
+            fruit5.y = rand() % height;
+            nTail++;
+        }
+        if (head.x == fruit6.x && head.y == fruit6.y) {
+            score += 10;
+            fruit6.x = rand() % width;
+            fruit6.y = rand() % height;
+            nTail++;
+        }
     }
 }
 
