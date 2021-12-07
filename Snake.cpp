@@ -2,6 +2,7 @@
 #include <iostream>
 #include <conio.h>
 #include <Windows.h>
+#include <time.h>
 using namespace std;
 
 bool gameOver, lateGame, endGame;
@@ -146,6 +147,7 @@ void Logic() {
     if (head.y >= height) head.y = 0; else if (head.y < 0) head.y = height - 1;
     for (int i = 0; i < nTail; i++) {
         if (tail[i].x == head.x && tail[i].y == head.y) {
+            cout << "You ate your tail :(\n";
             gameOver = true;
         }
     }
