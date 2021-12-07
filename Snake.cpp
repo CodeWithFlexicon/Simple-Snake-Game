@@ -5,7 +5,7 @@
 using namespace std;
 
 bool gameOver, lateGame, endGame;
-const int width = 30; //map dimensions
+const int width = 40; //map dimensions
 const int height = 20;
 int nTail, score;
 enum eDirection { STOP, LEFT, RIGHT, UP, DOWN };
@@ -202,7 +202,7 @@ void Logic() {
             fruit3.y = rand() % height;
             nTail++;
         }
-        if (head.x == fruit4.x && head.y == fruit5.y) {
+        if (head.x == fruit4.x && head.y == fruit4.y) {
             score += 10;
             fruit4.x = rand() % width;
             fruit4.y = rand() % height;
