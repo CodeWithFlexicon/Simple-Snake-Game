@@ -78,6 +78,12 @@ void Draw() {
         cout << "-";
     cout << "\n";
     cout << "Score: " << score << "\n";
+    if (nTail > 5 && lateGame) {
+        cout << "Oh, you're very good at getting the fruit, let's add some more!\n";
+    }
+    if (nTail > 20 && endGame) {
+        cout << "Oh my- HOW ABOUT SOME MORE FRUIT? CAREFUL NOT TO EAT YOUR TAIL!\n";
+    }
 }
 
 void Input() {
