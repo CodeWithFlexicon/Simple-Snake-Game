@@ -14,6 +14,8 @@ eDirection dir;
 Snake tail[100], head;
 Fruit fruit, fruit2, fruit3, fruit4, fruit5, fruit6, fruit7, fruit8, fruit9;
 
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
 void Setup() {
     gameOver = false;
     lateGame = false;
@@ -39,25 +41,25 @@ void Draw() {
             if (j == 0)
                 cout << "#";
             if (i == head.y && j == head.x)
-                printf("O");
+                printf("\x1B[32mO\033[0m");
             else if (i == fruit.y && j == fruit.x)
-                printf("Q");
+                printf("\x1B[31mQ\033[0m");
             else if (i == fruit2.y && j == fruit2.x)
-                printf("G");
+                printf("\x1B[33mG\033[0m");
             else if (i == fruit3.y && j == fruit3.x)
-                printf("U");
+                printf("\x1B[34mU\033[0m");
             else if (i == fruit4.y && j == fruit4.x)
-                printf("V");
+                printf("\x1B[35mV\033[0m");
             else if (i == fruit5.y && j == fruit5.x)
-                printf("X");
+                printf("\x1B[36mX\033[0m");
             else if (i == fruit6.y && j == fruit6.x)
-                printf("Z");
+                printf("\x1B[91mZ\033[0m");
             else if (i == fruit7.y && j == fruit7.x)
-                printf("A");
+                printf("\x1B[93mA\033[0m");
             else if (i == fruit8.y && j == fruit8.x)
-                printf("B");
+                printf("\x1B[94mB\033[0m");
             else if (i == fruit9.y && j == fruit9.x)
-                printf("C");
+                printf("\x1B[96mC\033[0m");
             else {
                 bool print = false;
                 for (int k = 0; k < nTail; k++) {
