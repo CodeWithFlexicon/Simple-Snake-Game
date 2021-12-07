@@ -1,15 +1,8 @@
-﻿#include <iostream>
+#include "Snake.h"
+#include <iostream>
 #include <conio.h>
 #include <Windows.h>
 using namespace std;
-
-struct snake {
-    int x, y;
-} tail[100], head;
-
-struct fruit {
-    int x, y;
-} fruit, fruit2, fruit3, fruit4, fruit5, fruit6;
 
 bool gameOver, lateGame;
 const int width = 30; //map dimensions
@@ -17,6 +10,8 @@ const int height = 20;
 int nTail, score;
 enum eDirection { STOP, LEFT, RIGHT, UP, DOWN };
 eDirection dir;
+Snake tail[100], head;
+Fruit fruit, fruit2, fruit3, fruit4, fruit5, fruit6;
 
 void Setup() {
     gameOver = false;
@@ -34,7 +29,7 @@ void Setup() {
 
 void Draw() {
     system("cls"); //clears the screen and produces a lot of flickering.
-    for (int i = 0; i < width+2; i++)
+    for (int i = 0; i < width + 2; i++)
         cout << "_";
     cout << "\n";
     for (int i = 0; i < height; i++) {
@@ -57,13 +52,13 @@ void Draw() {
                 printf("Z");
             else {
                 bool print = false;
-                for (int k = 0; k < nTail; k++) {      
-                    if(tail[k].x == j && tail[k].y == i) {
+                for (int k = 0; k < nTail; k++) {
+                    if (tail[k].x == j && tail[k].y == i) {
                         cout << "o";
                         print = true;
                     }
                 }
-                if (!print) 
+                if (!print)
                     cout << " ";
             }
             if (j == width - 1)
@@ -72,7 +67,7 @@ void Draw() {
         cout << "\n";
     }
 
-    for (int i = 0; i < width+2; i++)
+    for (int i = 0; i < width + 2; i++)
         cout << "-";
     cout << "\n";
     cout << "Score: " << score << "\n";
@@ -190,15 +185,4 @@ void Logic() {
             nTail++;
         }
     }
-}
-
-int main() {
-    Setup();
-    while (!gameOver) {
-        Draw();
-        Input();
-        Logic();
-        //Sleep(10); //slows game a bit
-    }
-    return 0;
 }
